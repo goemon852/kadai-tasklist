@@ -10,8 +10,13 @@
   </head>
 
   <body>
-    <%= render "layouts/link" %>
     <%= render "layouts/flash_messages" %>
+    <% if logged_in? %>
+      <p>ログイン完了ユーザー：<%= current_user.name %></p>
+      <%= link_to "ログアウト", logout_path, method: :delete %>
+    <% else %>
+      <%= render "layouts/link" %>
+    <% end %>
     
     <%= yield %>
   </body>
