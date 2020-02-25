@@ -1,14 +1,14 @@
 class TasksController < ApplicationController
     
     before_action :require_user_logged_in
-    before_action :correct_user, only: [:destroy]
+    before_action :correct_user, only: [:destroy, :show, :edit]
     
     def index
         @tasks = current_user.tasks.order(id: :desc)
     end
     
     def show
-        @task = Task.find(params[:id])  
+        @task = Task.find(params[:id])
     end
     
     def new
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
         
         if @task.save
             flash[:notice] = "タスクが正常に追加されました"
-            redirect_to @task
+            redirect_to root_path
         else
             flash[:notice] = "タスクが追加されませんでした"
             render :new
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
         
         if @task.update(task_params)
             flash[:notice] = "タスクが正常に更新されました"
-            redirect_to @task
+            redirect_to root_path
         else
             flash[:notice] = "タスクが更新されませんでした"
             render :edit
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
     def correct_user
         @task = current_user.tasks.find_by(id: params[:id])
         unless @task
-            redirect_to root_url
+            redirect_to root_path
         end
     end    
     
