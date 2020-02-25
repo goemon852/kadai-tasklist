@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     def show
         @task = Task.find(params[:id])
         unless @task
-            redirect_back(fallback_location: root_path)
+            redirect_to root_path
         end
     end
     
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
     def edit
         @task = Task.find(params[:id])
         unless @task
-            redirect_back(fallback_location: root_path)
+            redirect_to root_path
         end
     end
     
