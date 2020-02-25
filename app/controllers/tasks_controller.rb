@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     def show
         @task = Task.find(params[:id])
         unless @task
-            redirect_to root_path
+            redirect_back(fallback_location: root_path)
         end
     end
     
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
     def edit
         @task = Task.find(params[:id])
         unless @task
-            redirect_to root_path
+            redirect_back(fallback_location: root_path)
         end
     end
     
@@ -52,7 +52,7 @@ class TasksController < ApplicationController
     def destroy
         @task.destroy
         flash[:notice] = 'タスクが正常に削除されました'
-        redirect_to root_path
+        redirect_back(fallback_location: root_path)
     end
     
     private
