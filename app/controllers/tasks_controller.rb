@@ -9,6 +9,9 @@ class TasksController < ApplicationController
     
     def show
         @task = Task.find(params[:id])
+        unless @task
+            redirect_to root_path
+        end
     end
     
     def new
@@ -29,6 +32,9 @@ class TasksController < ApplicationController
     
     def edit
         @task = Task.find(params[:id])
+        unless @task
+            redirect_to root_path
+        end
     end
     
     def update
